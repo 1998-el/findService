@@ -1,0 +1,175 @@
+/* Reset des styles par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style général du corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fffdfd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Conteneur principal */
+.register-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes */
+    gap: 2rem; /* Espace entre les colonnes */
+    background-color: transparent;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px; /* Largeur maximale du conteneur */
+}
+
+/* Section du formulaire */
+.form-section {
+    grid-column: 1 / 2; /* Occupe la première colonne */
+}
+
+/* Section de prévisualisation de la photo */
+.preview-section {
+    grid-column: 2 / 3; /* Occupe la deuxième colonne */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Titre du formulaire */
+.register-container h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/* Groupe de champs de formulaire */
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #e46002;
+    outline: none;
+}
+
+/* Style spécifique pour le champ de fichier */
+.input-group input[type="file"] {
+    padding: 0.5rem;
+    background-color: #f9f9f9;
+    border: 1px dashed #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input-group input[type="file"]:hover {
+    border-color: #e46002;
+}
+
+/* Image de prévisualisation */
+#profile-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+/* Texte de remplacement si aucune image n'est sélectionnée */
+#profile-preview[src=""] {
+    display: none;
+}
+
+.preview-section p {
+    color: #777;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Bouton de soumission */
+.btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #e46002;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ca5705;
+}
+
+/* Message d'erreur */
+.error {
+    color: #ff4d4d;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Responsive design pour les petits écrans */
+@media (max-width: 768px) {
+    .register-container {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 1rem;
+    }
+
+    .form-section,
+    .preview-section {
+        grid-column: 1 / -1; /* Occupe toute la largeur */
+    }
+
+    .preview-section {
+        order: -1; /* La prévisualisation apparaît en haut */
+    }
+}
+
+@media (max-width: 480px) {
+    .register-container {
+        padding: 1.5rem;
+    }
+
+    .register-container h2 {
+        font-size: 1.25rem;
+    }
+
+    .input-group input,
+    .input-group select {
+        padding: 0.5rem;
+    }
+
+    .btn {
+        padding: 0.5rem;
+    }
+}

@@ -1,0 +1,240 @@
+:root {
+    --primary-color: #ff6347; /* Couleur principale (orange) */
+    --primary-hover-color: #ff4500; /* Couleur principale au survol */
+    --secondary-color: #333; /* Couleur secondaire (texte sombre) */
+    --background-color: #f4f4f4; /* Couleur de fond */
+    --text-color: #333; /* Couleur du texte principal */
+    --light-text-color: #666; /* Couleur du texte secondaire */
+    --light-background-color: #f2f2f2; /* Fond clair */
+    --footer-background-color: #000000; /* Fond du footer */
+    --footer-text-color: #ccc; /* Texte du footer */
+    --white: #fff; /* Blanc */
+    --black: #000; /* Noir */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Assure que padding et border sont inclus dans la largeur/hauteur */
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Police de caractères */
+    line-height: 1.6; /* Espacement des lignes */
+}
+
+/* Barre de navigation */
+.navbar {
+    background-color: #f4f4f4; /* Couleur de fond */
+    padding: 0.8rem 6rem; /* Espacement intérieur */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #6c6a6a22;
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-container h1 {
+    color: #ff6347; /* Couleur du logo */
+    margin: 0; /* Supprime la marge par défaut */
+    font-size: 2rem;
+}
+
+.logo-container span {
+    font-size: 13px; /* Taille du texte */
+    color: #333; /* Couleur du texte */
+
+    margin: 0; /* Supprime la marge par défaut */
+    padding: 0; /* Supprime le padding par défaut */
+}
+
+/* Menu de navigation */
+.nav-menu {
+    display: flex;
+    list-style: none; /* Supprime les puces */
+}
+
+.nav-item {
+    margin-left: 2rem; /* Espacement entre les éléments */
+}
+
+.nav-link {
+    position: relative; /* Permet de positionner le pseudo-élément ::after */
+    color: var(--light-text-color);
+
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    font-weight: 400;
+    transition: color 0.3s ease; /* Animation de la couleur du texte */
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Positionne l'élément en bas du lien */
+    left: 0;
+    height: 2px; /* Épaisseur de la ligne */
+    width: 0; /* Largeur initiale à 0 */
+    background-color: var(--primary-color); /* Couleur de la ligne */
+
+    transition: width 0.3s ease; /* Animation de la largeur */
+}
+
+.nav-link:hover {
+    color: var(--primary-color); /* Changement de couleur du texte au survol */
+
+}
+
+.nav-link:hover::after {
+    width: 100%; /* Largeur de la ligne au survol */
+}
+
+.nav-link.active {
+    color: var(--primary-color); /* Couleur du texte pour l'élément actif */
+
+}
+
+.nav-link.active::after {
+    width: 100%; /* Largeur de la ligne pour l'élément actif */
+}
+
+.nav-link.active {
+    background-color: var(--primary-color); /* Fond pour l'élément actif */
+
+    color: #fff; /* Couleur du texte pour l'élément actif */
+}
+.login_container{
+    display: flex;
+}
+.login_container a{
+    text-decoration: none;
+    color: var(--white) !important;
+
+    padding:  .5rem 1rem;
+    background-color: var(--primary-color);
+
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+/* Bouton Hamburger (pour mobile) */
+.hamburger {
+    display: none; /* Masqué par défaut */
+    flex-direction: column;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333; /* Couleur des barres */
+    margin: 4px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Animation */
+}
+
+/* Styles réactifs */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.6rem 1rem; /* Réduit l'espacement sur les petits écrans */
+    }
+
+    .nav-menu {
+        display: none; /* Masque le menu par défaut */
+        flex-direction: column;
+        width: 100%;
+    background-color: var(--background-color); /* Couleur de fond */
+
+        position: absolute;
+        top: 60px; /* Position en dessous de la barre de navigation */
+        left: 0;
+        padding: 1rem 0;
+    }
+
+    .nav-menu.active {
+        display: flex; /* Affiche le menu lorsqu'il est actif */
+    }
+
+    .nav-item {
+        margin: 1rem 0; /* Espacement entre les éléments */
+        text-align: center; /* Centrage du texte */
+    }
+
+    .hamburger {
+        display: flex; /* Affiche le bouton hamburger */
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px); /* Animation de la première barre */
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0; /* Masque la deuxième barre */
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px); /* Animation de la troisième barre */
+    }
+}
+
+/* Style pour le conteneur du spinner */
+.loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Assurez-vous qu'il est au-dessus de tout */
+}
+
+/* Animation des trois boules */
+.spinner {
+    display: flex;
+    justify-content: space-between;
+    width: 60px;
+}
+
+.spinner div {
+    width: 12px;
+    height: 12px;
+    background-color: #333;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out;
+}
+
+.spinner div:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.spinner div:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+}

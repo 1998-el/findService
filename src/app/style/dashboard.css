@@ -1,0 +1,340 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+}
+
+.dashboard {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #090909;
+    color: #fff;
+    height: 100vh;
+    padding: 20px;
+}
+.logo h1 {
+    color: #ff6347; /* Couleur du logo */
+    margin: 0; /* Supprime la marge par défaut */
+    font-size: 2rem;
+}
+
+.logo span {
+    font-size: 13px; /* Taille du texte */
+    color: #333; /* Couleur du texte */
+
+    margin: 0; /* Supprime la marge par défaut */
+    padding: 0; /* Supprime le padding par défaut */
+}
+.nav-menu{
+    /* border: 1px solid; */
+}
+
+.nav-menu ul {
+    list-style: none;
+}
+
+.nav-menu ul li {
+    margin: 15px 0;
+}
+
+.nav-menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: .5rem 0;
+    border-bottom: 1px solid #c471054e;
+    transition:  all .3s ease;
+}
+.nav-menu ul li a:hover{
+    background-color: #c471054e;
+    backdrop-filter: blur(10px);
+}
+
+.nav-menu ul li a i {
+    margin-right: 10px;
+}
+
+.profile {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 1rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #090909;
+    border: 1px solid;
+}
+
+.search-bar input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.notifications {
+    position: relative;
+}
+
+.notifications .badge {
+    background-color: red;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+
+.user-profile {
+    position: relative;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.user-profile .dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.user-profile .dropdown a {
+    display: block;
+    padding: 5px 0;
+    color: #333;
+    text-decoration: none;
+}
+
+.user-profile:hover .dropdown {
+    display: block;
+}
+
+.kpi-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.kpi-cards .card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    flex: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tasks ul {
+    list-style: none;
+}
+
+.tasks ul li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-priority.high {
+    color: red;
+}
+
+.task-priority.medium {
+    color: orange;
+}
+
+.graphs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.graphs canvas {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.reviews .review {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.reviews .rating {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Styles pour les sections */
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Styles pour la liste des rendez-vous */
+.appointments-list {
+    margin-top: 20px;
+}
+
+.appointment {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.appointment h3 {
+    margin-bottom: 10px;
+}
+
+.appointment p {
+    margin: 5px 0;
+}
+
+/* Styles pour les sections */
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Styles pour la liste des rendez-vous */
+.appointments-list {
+    margin-top: 20px;
+}
+
+.appointment {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.appointment h3 {
+    margin-bottom: 10px;
+}
+
+.appointment p {
+    margin: 5px 0;
+}
+
+/* Styles pour la liste des tâches */
+.tasks-list {
+    margin-top: 20px;
+}
+
+.task {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.task h3 {
+    margin-bottom: 10px;
+}
+
+.task p {
+    margin: 5px 0;
+}
+
+/* Styles pour les revenus */
+.revenue-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.stat h3 {
+    margin-bottom: 10px;
+}
+
+/* Styles pour les paramètres */
+.settings-form {
+    margin-top: 20px;
+}
+
+.settings-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.settings-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.settings-form button {
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.settings-form button:hover {
+    background-color: #34495e;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "homeservice",
+  "version": "1.0.0",
+  "description": "plateforme de prestation de service a domicile ",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1998-el/findService.git"
+  },
+  "author": "charly pierre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1998-el/findService/issues"
+  },
+  "homepage": "https://github.com/1998-el/findService#readme"
+}

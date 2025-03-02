@@ -1,0 +1,197 @@
+/* Reset des styles par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style général du corps de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Conteneur du formulaire de connexion */
+.login-container {
+    display: flex;
+    background-color: #f0f2f5;
+    width: 90%;
+    max-width: 1200px; /* Largeur maximale pour les grands écrans */
+    height: 80vh; /* Hauteur relative à la fenêtre */
+    overflow: hidden; /* Cache tout débordement */
+    border-radius: 15px; /* Bordures arrondies */
+}
+
+/* Section de l'image à gauche */
+.image_left {
+    width: 50%;
+    background: url('../assets/images/login_bg.svg') no-repeat center center;
+    background-size: cover; /* Couvre toute la zone */
+}
+
+/* Section du formulaire à droite */
+.form_left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Formulaire */
+.form_left form {
+    width: 100%;
+    max-width: 400px; /* Largeur maximale du formulaire */
+    margin: 0 auto; /* Centrage horizontal */
+}
+
+/* Titre du formulaire */
+.form_left h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 2rem;
+    text-align: center;
+}
+
+/* Groupe de champs de formulaire */
+.input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #ca5705;
+    box-shadow: 0 0 8px rgba(226, 88, 2, 0.3);
+    outline: none;
+}
+
+/* Style spécifique pour le sélecteur de type de compte */
+.input-group select {
+    appearance: none; /* Supprime le style par défaut du navigateur */
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Placeholder pour le sélecteur */
+.input-group select option[disabled][selected] {
+    color: #999;
+}
+
+/* Lien "Mot de passe oublié" */
+.forgot_pass {
+    margin-top: 0.5rem;
+    font-size: 13px;
+}
+
+.forgot_pass a {
+    color: #ca5705;
+    text-decoration: none;
+}
+
+.forgot_pass a:hover {
+    text-decoration: underline;
+}
+
+/* Bouton d'inscription */
+.btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #e46002;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #ca5705;
+    transform: translateY(-2px); /* Effet de soulèvement */
+}
+
+.btn:active {
+    transform: translateY(0); /* Retour à la position initiale */
+}
+
+/* Message d'erreur */
+.error {
+    color: #ff4d4d;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Pied de page du formulaire */
+.login_footer {
+    margin-top: 1rem;
+    color: #555;
+    text-align: center;
+}
+
+.login_footer a {
+    color: #b03a04;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.login_footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design pour les petits écrans */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column; /* Empile les sections verticalement */
+        height: auto;
+        padding: 1rem;
+    }
+
+    .image_left {
+        width: 100%;
+        height: 200px; /* Hauteur fixe pour l'image */
+        background-size: contain; /* Ajuste l'image à la largeur */
+    }
+
+    .form_left {
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+    .form_left h2 {
+        font-size: 1.5rem;
+    }
+
+    .input-group input,
+    .input-group select {
+        padding: 0.5rem;
+    }
+
+    .btn {
+        padding: 0.5rem;
+    }
+}
