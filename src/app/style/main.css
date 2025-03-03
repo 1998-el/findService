@@ -100,10 +100,11 @@ body {
 }
 
 .service-card {
-    background-color: var(--light-background-color);
+    /* background-color: var(--light-background-color); */
     overflow: hidden;
     width: 370px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid red;
+    /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
 
 .service-image {

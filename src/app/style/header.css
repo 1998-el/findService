@@ -131,6 +131,15 @@ body {
     border-radius: 5px;
     text-transform: capitalize;
 }
+.login_container button{
+    color: var(--white) !important;
+    padding:  .5rem 1rem;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+
+}
 /* Bouton Hamburger (pour mobile) */
 .hamburger {
     display: none; /* Masqué par défaut */

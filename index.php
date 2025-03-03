@@ -5,30 +5,9 @@ $currentPage = 'home';
 // Inclure la connexion à la base de données
 require_once __DIR__ . '/src/app/config/DbConfig.php'; // Chemin absolu vers DbConfig.php
 
-// Chemin du dossier où les images seront stockées
-$uploadDir = __DIR__ . '/src/app/view/uploads/'; // Chemin corrigé vers src/app/view/uploads
-
-// Vérifier si le dossier existe, sinon le créer
-if (!is_dir($uploadDir)) {
-    mkdir($uploadDir, 0755, true);
-}
-
-// Traitement du formulaire de téléversement d'image
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['photo'])) {
-    $fileName = basename($_FILES['photo']['name']);
-    $filePath = $uploadDir . $fileName;
-
-    // Déplacer le fichier téléversé vers le dossier des uploads
-    if (move_uploaded_file($_FILES['photo']['tmp_name'], $filePath)) {
-        // Enregistrer le chemin de l'image dans la base de données
-        $stmt = $pdo->prepare("UPDATE workers SET photo_url = ? WHERE id = ?");
-        $stmt->execute([$fileName, $workerId]);
-
-        echo "Image téléversée avec succès.";
-    } else {
-        echo "Erreur lors du téléversement de l'image.";
-    }
-}
+// Chemin du dossier où les images sont stockées
+$uploadDir = __DIR__ . '/src/app/view/uploads/'; // Chemin absolu vers le dossier uploads
+$uploadUrl = 'src/app/view/uploads/'; // Chemin relatif pour les images dans le navigateur
 
 // Récupérer les workers avec les informations des utilisateurs
 $sql = "
@@ -64,7 +43,6 @@ try {
 // Inclure le header
 require_once __DIR__ . '/src/app/component/Header.php'; // Chemin absolu vers Header.php
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,12 +65,23 @@ require_once __DIR__ . '/src/app/component/Header.php'; // Chemin absolu vers He
         <div class="services-container">
             <?php foreach ($workers as $worker): ?>
                 <div class="service-card">
-                    <!-- Afficher l'image à partir du chemin -->
-                    <?php if (!empty($worker['photo_url'])): ?>
-                        <img src="<?php echo htmlspecialchars($uploadDir . $worker['photo_url']); ?>" alt="<?php echo htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']); ?>" class="service-image">
-                    <?php else: ?>
-                        <img src="chemin/vers/image_par_defaut.jpg" alt="Image par défaut" class="service-image">
-                    <?php endif; ?>
+                    <!-- Afficher l'image si elle existe dans le dossier uploads -->
+                    <?php
+                    $imagePath = $uploadDir . $worker['photo_url']; // Chemin absolu du fichier
+                    $imageUrl = $uploadUrl . $worker['photo_url']; // Chemin relatif pour le navigateur
+
+                    if (!empty($worker['photo_url']) && file_exists($imagePath)) {
+                        // Si le fichier existe, afficher l'image
+                        ?>
+                        <img src="<?php echo htmlspecialchars($imageUrl); ?>" alt="<?php echo htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']); ?>" class="service-image">
+                        <?php
+                    } else {
+                        // Si le fichier n'existe pas, afficher une image par défaut
+                        ?>
+                        <img src="/chemin/vers/worker_14_1741026663.jpg" alt="Image par défaut" class="service-image">
+                        <?php
+                    }
+                    ?>
                     <h2 class="service-title"><?php echo htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']); ?></h2>
                     <h3 class="service-job-title"><?php echo htmlspecialchars($worker['profession']); ?></h3>
                     <p class="service-description">
@@ -103,18 +92,6 @@ require_once __DIR__ . '/src/app/component/Header.php'; // Chemin absolu vers He
                     <a href="<?php echo getRoute('explore'); ?>" class="btn">Learn More</a>
                 </div>
             <?php endforeach; ?>
-        </div>
-    </section>
-
-    <section class="team-section">
-        <div class="team-container">
-            <img src="src/app/assets/images/home2-removebg-preview.png" alt="Our Team" class="team-image">
-            <div class="team-content">
-                <h2 class="team-title">Our Team</h2>
-                <p class="team-description">
-                    Meet our team of experts who are passionate about delivering high-quality services.
-                </p>
-            </div>
         </div>
     </section>
 
@@ -176,5 +153,18 @@ require_once __DIR__ . '/src/app/component/Header.php'; // Chemin absolu vers He
             <p>&copy; 2025 Your Company. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Script JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Exemple d'ajout d'un écouteur d'événement
+            const myButton = document.getElementById('myButton');
+            if (myButton) {
+                myButton.addEventListener('click', function() {
+                    alert('Bouton cliqué !');
+                });
+            }
+        });
+    </script>
 </body>
 </html>

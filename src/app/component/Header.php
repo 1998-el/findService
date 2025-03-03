@@ -67,7 +67,7 @@ $currentPage = 'explore'; // Remplacez cette valeur par la page actuelle dynamiq
                     <button id="logout-button" class="logout-button">Sign Out</button>
                 <?php else: ?>
                     <!-- Afficher "Sign In" si l'utilisateur n'est pas connecté -->
-                    <a href="<?php echo getRoute('login'); ?>">Sign In</a>
+                    <a href="<?php echo getRoute('login'); ?>" >Sign In</a>
                 <?php endif; ?>
             </div>
             <button class="hamburger" aria-label="Toggle navigation">
