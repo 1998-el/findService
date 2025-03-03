@@ -82,14 +82,20 @@ require_once __DIR__ . '/src/app/component/Header.php'; // Chemin absolu vers He
                         <?php
                     }
                     ?>
-                    <h2 class="service-title"><?php echo htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']); ?></h2>
-                    <h3 class="service-job-title"><?php echo htmlspecialchars($worker['profession']); ?></h3>
-                    <p class="service-description">
-                        <?php echo htmlspecialchars($worker['description']); ?>
-                    </p>
-                    <p class="service-rate">Tarif horaire : <?php echo htmlspecialchars($worker['hourly_rate']); ?> €</p>
-                    <p class="service-availability">Disponibilité : <?php echo htmlspecialchars($worker['availability']); ?></p>
-                    <a href="<?php echo getRoute('explore'); ?>" class="btn">Learn More</a>
+                    <div class="card_text">
+                        <div class="card_title">
+                        <h2 class="service-title"><?php echo htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']); ?></h2>
+                        <h3 class="service-job-title"><?php echo htmlspecialchars($worker['profession']); ?></h3>
+                        </div>
+    
+                        <p class="service-description">
+                            <?php echo htmlspecialchars($worker['description']); ?>
+                        </p>
+                        <p class="service-rate">Tarif horaire : <?php echo htmlspecialchars($worker['hourly_rate']); ?> €</p>
+                        <!-- <p class="service-availability">Disponibilité : <?php echo htmlspecialchars($worker['availability']); ?></p> -->
+                        <a href="<?php echo getRoute('explore'); ?>" class="btn">Learn More</a>
+                    </div>
+                  
                 </div>
             <?php endforeach; ?>
         </div>

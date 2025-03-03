@@ -103,7 +103,9 @@ body {
     /* background-color: var(--light-background-color); */
     overflow: hidden;
     width: 370px;
-    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
     /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
 
@@ -116,27 +118,43 @@ body {
 }
 
 .service-title {
-    font-size: 1.5rem;
+    font-size: 16px;
     margin: 1rem 0;
-    color: var(--secondary-color);
+    color:#333;
+    text-transform: capitalize;
 }
-
-.service-description {
-    font-size: 1rem;
-    color: var(--light-text-color);
+.card_text{
+    display: flex;
+    flex-direction: column;
     padding: 0 1rem;
-    margin-bottom: 1.5rem;
+}
+.card_title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.service-job-title{
+    font-size: 16px;
+    color: #e48a0c;
+    text-transform: capitalize;
+}
+.service-description {
+    font-size: 16px;
+    color: #404145;
+    /* padding: 0 1rem; */
+    margin-bottom: 1rem;
 }
 
 .service-card .btn {
     display: inline-block;
-    margin-bottom: 1.5rem;
+    margin: 1.5rem 0;
     padding: 0.5rem 1.5rem;
     font-size: 0.9rem;
     background-color: #ff6347;
     color: #f2f2f2;
     border-radius: 5px;
     text-decoration: none;
+    text-align: center;
     transition: background-color 0.3s ease;
 }
 

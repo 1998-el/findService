@@ -91,7 +91,44 @@ body {
 .input-group input[type="file"]:hover {
     border-color: #e46002;
 }
+/* Style de base pour le textarea */
+textarea#description {
+    width: 100%; /* Prend toute la largeur disponible */
+    min-height: 150px; /* Hauteur minimale */
+    padding: 12px; /* Espacement intérieur */
+    font-family: 'Arial', sans-serif; /* Police lisible */
+    font-size: 16px; /* Taille de police confortable */
+    color: #333; /* Couleur du texte */
+    background-color: #f9f9f9; /* Fond légèrement gris */
+    border: 2px solid #ddd; /* Bordure légère */
+    border-radius: 8px; /* Coins arrondis */
+    resize: vertical; /* Permet le redimensionnement vertical uniquement */
+    outline: none; /* Supprime la bordure par défaut au focus */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animation fluide */
+}
 
+/* Style au survol */
+textarea#description:hover {
+    border-color: #007BFF; /* Bordure bleue au survol */
+}
+
+/* Style au focus */
+textarea#description:focus {
+    border-color: #0056b3; /* Bordure bleue plus foncée au focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Légère ombre bleue */
+}
+
+/* Style pour le placeholder */
+textarea#description::placeholder {
+    color: #999; /* Couleur du texte du placeholder */
+    font-style: italic; /* Texte en italique */
+}
+
+/* Style pour un textearea désactivé */
+textarea#description:disabled {
+    background-color: #eee; /* Fond gris */
+    cursor: not-allowed; /* Curseur interdit */
+}
 /* Image de prévisualisation */
 #profile-preview {
     width: 150px;
