@@ -69,6 +69,9 @@ require_once __DIR__ . '/src/app/component/Header.php';
     <link rel="stylesheet" href="src/app/style/main.css?v=1.0.1"> <!-- Lien vers le fichier CSS -->
 </head>
 <body>
+    <div class="body_container">
+
+    
     <!-- Header.php -->
     <header class="hero-section">
         <div class="hero-content">
@@ -131,39 +134,140 @@ require_once __DIR__ . '/src/app/component/Header.php';
             <?php endforeach; ?>
         </div>
         <?php endif; ?>
-        <div class="appointment-container">
+    </section>
+    <div class="appointment-container">
+    <div class="btn_close">
+            <button>
+                close
+            </button>
+        </div>
     <div class="appointment-card">
+    
         <div class="image-container">
             <img src="https://example.com/calendar-illustration.jpg" 
                  alt="Illustration calendrier" 
                  class="calendar-image" />
         </div>
         
-        <div class="form-container">
-            <div class="date-picker-group">
-                <label for="appointmentDate">Choisissez une date :</label>
-                <input 
-                    type="date" 
-                    id="appointmentDate" 
-                    name="appointmentDate"
-                    min="<?= date('Y-m-d') ?>" 
-                    required
-                    class="date-input"
-                />
+        <div class="appointment-container">
+        <div class="btn_close">
+            <button>close</button>
+        </div>
+        <div class="appointment-card">
+            <div class="image-container">
+                <img id="workerPhoto" src="" alt="Photo du worker" class="calendar-image" />
             </div>
             
-            <button class="cta-button" onclick="handleAppointment()">
-                <span class="button-icon">📅</span>
-                Prendre Rendez-vous
-            </button>
+            <div class="form-container">
+                <div class="worker-info">
+                    <h2 id="workerName"></h2>
+                    <p class="worker-profession" id="workerProfession"></p>
+                    <p class="worker-rate" id="workerRate"></p>
+                    <p class="worker-description" id="workerDescription"></p>
+                </div>
+                
+                <div class="date-picker-group">
+                    <label for="appointmentDate">Choisissez une date :</label>
+                    <input type="date" 
+                           id="appointmentDate" 
+                           name="appointmentDate"
+                           min="<?= date('Y-m-d') ?>" 
+                           required
+                           class="date-input" />
+                    <input type="hidden" id="selectedWorkerId" name="worker_id">
+                </div>
+                
+                <button class="cta-button" onclick="handleAppointment()">
+                    <span class="button-icon">📅</span>
+                    Prendre Rendez-vous
+                </button>
+            </div>
         </div>
     </div>
-</div>
 
-    </section>
-   
-</script>
-    <footer class="footer_b">
+
+</div>
+  
+    <!-- Script JavaScript -->
+
+    <script>
+        // Gestion de la fermeture
+        const toggle_button = document.querySelector('.btn_close');
+        const appointmentContainer = document.querySelector('.appointment-container');
+        
+        if(toggle_button && appointmentContainer) {
+            toggle_button.addEventListener('click', () => {
+                appointmentContainer.classList.remove('active');
+            });
+        }
+
+        // Gestion du clic sur les cartes
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if(!e.target.closest('a')) { // Ignore les clics sur les liens
+                    const workerData = {
+                        id: card.dataset.id,
+                        name: card.dataset.name,
+                        profession: card.dataset.profession,
+                        photo: card.dataset.photo,
+                        rate: card.dataset.rate,
+                        description: card.dataset.description
+                    };
+
+                    // Mise à jour de l'interface
+                    document.getElementById('workerPhoto').src = workerData.photo;
+                    document.getElementById('workerName').textContent = workerData.name;
+                    document.getElementById('workerProfession').textContent = workerData.profession;
+                    document.getElementById('workerRate').textContent = `Tarif horaire : ${workerData.rate} €`;
+                    document.getElementById('workerDescription').textContent = workerData.description;
+                    document.getElementById('selectedWorkerId').value = workerData.id;
+
+                    // Réinitialise la date
+                    document.getElementById('appointmentDate').value = '';
+                    
+                    // Affiche le container
+                    appointmentContainer.classList.add('active');
+                }
+            });
+        });
+
+        // Modification de handleAppointment()
+        function handleAppointment() {
+            const workerId = document.getElementById('selectedWorkerId').value;
+            const dateInput = document.getElementById('appointmentDate');
+            const selectedDate = dateInput.value;
+            
+            if(selectedDate && workerId) {
+                // Exemple d'envoi avec Fetch API
+                const formData = new FormData();
+                formData.append('worker_id', workerId);
+                formData.append('date', selectedDate);
+
+                fetch('<?= getRoute("appointment") ?>', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        alert(`Rendez-vous confirmé avec ${document.getElementById('workerName').textContent} pour le ${selectedDate}`);
+                        appointmentContainer.classList.remove('active');
+                    } else {
+                        alert('Erreur : ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Une erreur est survenue');
+                });
+                
+            } else {
+                alert('Veuillez sélectionner une date valide');
+            }
+        }
+    </script>
+</body>
+<footer class="footer_b">
         <div class="footer-container">
             <!-- Section À Propos -->
             <div class="footer-section">
@@ -222,30 +326,4 @@ require_once __DIR__ . '/src/app/component/Header.php';
         </div>
     </footer>
 
-    <!-- Script JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Exemple d'ajout d'un écouteur d'événement
-            const myButton = document.getElementById('myButton');
-            if (myButton) {
-                myButton.addEventListener('click', function() {
-                    alert('Bouton cliqué !');
-                });
-            }
-        });
-
-        function handleAppointment() {
-    const dateInput = document.getElementById('appointmentDate');
-    const selectedDate = dateInput.value;
-    
-    if(selectedDate) {
-        // Ajouter ici la logique de soumission
-        console.log('Date sélectionnée :', selectedDate);
-        alert(`Rendez-vous pris pour le ${selectedDate}`);
-    } else {
-        alert('Veuillez sélectionner une date');
-    }
-}
-    </script>
-</body>
 </html>
