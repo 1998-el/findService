@@ -4,7 +4,7 @@
 $routes = [
     'home' => 'index.php',
     'explore' => 'explore.php',
-    'about' => 'about.php',
+    'about' => 'findservice/about.php',
     'contact' => 'contact.php',
     'login' => 'Login.php',
 

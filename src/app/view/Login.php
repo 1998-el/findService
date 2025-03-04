@@ -46,9 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Rediriger en fonction du rôle
             if ($user['role'] === 'worker') {
-                header('Location: worker_dashboard.php');
-            } else {
                 header('Location: /findservice/');
+            } else {
+                header('Location: /findservice/src/app/view/Register.php');
             }
             exit;
         } else {

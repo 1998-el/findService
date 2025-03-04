@@ -131,8 +131,38 @@ require_once __DIR__ . '/src/app/component/Header.php';
             <?php endforeach; ?>
         </div>
         <?php endif; ?>
-    </section>
+        <div class="appointment-container">
+    <div class="appointment-card">
+        <div class="image-container">
+            <img src="https://example.com/calendar-illustration.jpg" 
+                 alt="Illustration calendrier" 
+                 class="calendar-image" />
+        </div>
+        
+        <div class="form-container">
+            <div class="date-picker-group">
+                <label for="appointmentDate">Choisissez une date :</label>
+                <input 
+                    type="date" 
+                    id="appointmentDate" 
+                    name="appointmentDate"
+                    min="<?= date('Y-m-d') ?>" 
+                    required
+                    class="date-input"
+                />
+            </div>
+            
+            <button class="cta-button" onclick="handleAppointment()">
+                <span class="button-icon">📅</span>
+                Prendre Rendez-vous
+            </button>
+        </div>
+    </div>
+</div>
 
+    </section>
+   
+</script>
     <footer class="footer_b">
         <div class="footer-container">
             <!-- Section À Propos -->
@@ -203,6 +233,19 @@ require_once __DIR__ . '/src/app/component/Header.php';
                 });
             }
         });
+
+        function handleAppointment() {
+    const dateInput = document.getElementById('appointmentDate');
+    const selectedDate = dateInput.value;
+    
+    if(selectedDate) {
+        // Ajouter ici la logique de soumission
+        console.log('Date sélectionnée :', selectedDate);
+        alert(`Rendez-vous pris pour le ${selectedDate}`);
+    } else {
+        alert('Veuillez sélectionner une date');
+    }
+}
     </script>
 </body>
 </html>

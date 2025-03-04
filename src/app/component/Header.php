@@ -55,7 +55,7 @@ $currentPage = 'explore'; // Remplacez cette valeur par la page actuelle dynamiq
                     <a href="<?php echo getRoute('explore'); ?>" class="nav-link <?php echo ($currentPage == 'explore') ? 'active' : ''; ?>">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo getRoute('about'); ?>" class="nav-link <?php echo ($currentPage == 'about') ? 'active' : ''; ?>">About</a>
+                    <a href="<?php echo getRoute('about'); ?>" class="nav-link <?php echo ($currentPage == 'findservice/about') ? 'active' : ''; ?>">About</a>
                 </li>
                 <li class="nav-item">
                     <a href="<?php echo getRoute('contact'); ?>" class="nav-link <?php echo ($currentPage == 'contact') ? 'active' : ''; ?>">Contact</a>
