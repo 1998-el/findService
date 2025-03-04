@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="stylesheet" href="../style/Register.css">
+    <link rel="stylesheet" href="../style/Register.css?v=1.0.1">
 </head>
 <body>
     <div class="register-container">

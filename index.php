@@ -3,66 +3,100 @@
 $currentPage = 'home';
 
 // Inclure la connexion à la base de données
-require_once __DIR__ . '/src/app/config/DbConfig.php'; // Chemin absolu vers DbConfig.php
+require_once __DIR__ . '/src/app/config/db.php';
 
-// Chemin du dossier où les images sont stockées
-$uploadDir = __DIR__ . '/src/app/view/uploads/'; // Chemin absolu vers le dossier uploads
-$uploadUrl = 'src/app/view/uploads/'; // Chemin relatif pour les images dans le navigateur
-
-// Récupérer les workers avec les informations des utilisateurs
-$sql = "
-    SELECT 
-        users.id AS user_id,
-        users.first_name,
-        users.last_name,
-        users.email,
-        users.phone,
-        users.address,
-        users.city,
-        workers.id AS worker_id,
-        workers.profession,
-        workers.description,
-        workers.hourly_rate,
-        workers.availability,
-        workers.photo_url
-    FROM 
-        workers
-    INNER JOIN 
-        users 
-    ON 
-        workers.user_id = users.id;
-";
+// Initialiser $workers
+$workers = [];
 
 try {
-    $stmt = $pdo->query($sql);
+    $dbConfig = new DbConfig();
+    $pdo = $dbConfig->getConnection();
+
+    // Vérifier si une recherche est soumise
+    $activity = $_GET['activity'] ?? '';
+    $city = $_GET['city'] ?? '';
+
+    // Construire la requête SQL
+    $sql = "SELECT * FROM workers INNER JOIN users ON workers.user_id = users.id";
+
+    // Ajouter les conditions de recherche si des paramètres existent
+    if (!empty($activity) || !empty($city)) {
+        $sql .= " WHERE ";
+        $conditions = [];
+        
+        if (!empty($activity)) {
+            $conditions[] = "workers.profession LIKE :activity";
+        }
+        if (!empty($city)) {
+            $conditions[] = "users.city LIKE :city";
+        }
+        
+        $sql .= implode(" AND ", $conditions);
+    }
+
+    // Préparer et exécuter la requête
+    $stmt = $pdo->prepare($sql);
+
+    if (!empty($activity)) {
+        $stmt->bindValue(':activity', '%' . $activity . '%');
+    }
+    if (!empty($city)) {
+        $stmt->bindValue(':city', '%' . $city . '%');
+    }
+
+    $stmt->execute();
     $workers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 } catch (PDOException $e) {
-    die("Erreur lors de la récupération des workers : " . $e->getMessage());
+    die("Erreur : " . $e->getMessage());
 }
 
+// Chemin des images
+$uploadDir = __DIR__ . '/src/app/view/uploads/';
+$uploadUrl = '/findservice/src/app/view/uploads/';
+
 // Inclure le header
-require_once __DIR__ . '/src/app/component/Header.php'; // Chemin absolu vers Header.php
+require_once __DIR__ . '/src/app/component/Header.php';
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Our Service</title>
-    <link rel="stylesheet" href="src/app/style/main.css"> <!-- Lien vers le fichier CSS -->
+    <link rel="stylesheet" href="src/app/style/main.css?v=1.0.1"> <!-- Lien vers le fichier CSS -->
 </head>
 <body>
+    <!-- Header.php -->
     <header class="hero-section">
         <div class="hero-content">
             <h1>Welcome to Our Service</h1>
             <p>Explore our features and services that can help you achieve your goals.</p>
-            <a href="<?php echo getRoute('explore'); ?>" class="btn">Explore Now</a>
+
+            <!-- Barre de recherche -->
+            <form action="<?php echo getRoute('search'); ?>" method="GET" class="search-form">
+                <input type="text" name="activity" placeholder="Rechercher par activité (ex: Jardinage)" required>
+                <input type="text" name="city" placeholder="Rechercher par ville" required>
+                <button type="submit" class="btn">Rechercher</button>
+            </form>
         </div>
     </header>
 
+   
     <section class="services-section">
-        <h1 class="section-title">Our Team</h1>
-        <div class="services-container">
+        <h1 class="section-title">
+            <?= empty($activity) && empty($city) ? 'Our Team' : 'Search Results' ?>
+        </h1>
+
+        <?php if (empty($workers)): ?>
+            <p class="no-results">Aucun résultat trouvé.</p>
+            <div class="empty_">
+                <!-- empty  -->
+            </div>
+        <?php else: ?>
+            <div class="services-container">
             <?php foreach ($workers as $worker): ?>
                 <div class="service-card">
                     <!-- Afficher l'image si elle existe dans le dossier uploads -->
@@ -78,27 +112,25 @@ require_once __DIR__ . '/src/app/component/Header.php'; // Chemin absolu vers He
                     } else {
                         // Si le fichier n'existe pas, afficher une image par défaut
                         ?>
-                        <img src="/chemin/vers/worker_14_1741026663.jpg" alt="Image par défaut" class="service-image">
+                        <img src="src/app/view/default.jpg" alt="Image par défaut" class="service-image">
                         <?php
                     }
                     ?>
                     <div class="card_text">
                         <div class="card_title">
-                        <h2 class="service-title"><?php echo htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']); ?></h2>
-                        <h3 class="service-job-title"><?php echo htmlspecialchars($worker['profession']); ?></h3>
+                            <h2 class="service-title"><?php echo htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']); ?></h2>
+                            <h3 class="service-job-title"><?php echo htmlspecialchars($worker['profession']); ?></h3>
                         </div>
-    
                         <p class="service-description">
                             <?php echo htmlspecialchars($worker['description']); ?>
                         </p>
                         <p class="service-rate">Tarif horaire : <?php echo htmlspecialchars($worker['hourly_rate']); ?> €</p>
-                        <!-- <p class="service-availability">Disponibilité : <?php echo htmlspecialchars($worker['availability']); ?></p> -->
                         <a href="<?php echo getRoute('explore'); ?>" class="btn">Learn More</a>
                     </div>
-                  
                 </div>
             <?php endforeach; ?>
         </div>
+        <?php endif; ?>
     </section>
 
     <footer class="footer_b">

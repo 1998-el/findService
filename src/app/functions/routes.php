@@ -9,6 +9,7 @@ function getRoute($page) {
         'contact' => '/contact.php',
         'login' => 'src/app/view/login.php',
         'logout' => '/',
+         'search' => '/findservice/'
     ];
     return $routes[$page] ?? '#';
 }

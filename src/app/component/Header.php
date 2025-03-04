@@ -37,7 +37,7 @@ $currentPage = 'explore'; // Remplacez cette valeur par la page actuelle dynamiq
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/app/style/header.css">
+    <link rel="stylesheet" href="src/app/style/header.css?v=1.0.1">
     <title>Header</title>
 </head>
 <body>
