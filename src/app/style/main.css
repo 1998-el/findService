@@ -1,5 +1,6 @@
 
 @import url('./Seach.css');
+@import url('./preview.css');
 :root {
     --primary-color: #ff6347; /* Couleur principale (orange) */
     --primary-hover-color: #ff4500; /* Couleur principale au survol */
