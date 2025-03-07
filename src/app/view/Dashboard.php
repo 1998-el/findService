@@ -35,13 +35,14 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de Bord - Prestataire de Services</title>
+    <title>Tableau de Bord - Service</title>
+
     <link rel="stylesheet" href="../style/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary-color: #ff6347; /* Couleur principale (orange) */
-    --primary-hover-color: #ff4500; 
+            --primary-hover-color: #ff4500; 
             --secondary-color: #3f3f46;
             --background-color: #f8fafc;
             --text-color: #1e293b;
@@ -152,22 +153,19 @@ try {
             <section id="home" class="content-section active animated">
                 <div class="kpi-cards">
                     <div class="card">
-<h3>Rendez-vous Aujourd'hui</h3>
-
+                        <h3>Rendez-vous d'Aujourd'hui</h3>
                         <p><?php echo htmlspecialchars($totalAppointments) ?></p>
                     </div>
                     <div class="card">
-<h3>Tâches en Attente</h3>
-
+                        <h3>Tâches en Attente</h3>
                         <p>3</p>
                     </div>
                     <div class="card">
-                        <h3>Revenus du Mois</h3>
+                        <h3>Revenus Mensuels</h3>
                         <p>0,000 FCFA</p>
                     </div>
                     <div class="card">
-<h3>Note Moyenne</h3>
-
+                        <h3>Évaluation Moyenne</h3>
                         <p>4.7/5</p>
                     </div>
                 </div>
@@ -175,8 +173,7 @@ try {
 
             <!-- Section Rendez-vous -->
             <section id="appointments" class="content-section">
-<h2>Rendez-vous</h2>
-
+                <h2>Rendez-vous</h2>
                 <div class="appointments-list">
                     <?php if (!empty($appointments)): ?>
                         <?php foreach ($appointments as $appointment): ?>
@@ -198,8 +195,7 @@ try {
 
             <!-- Section Tâches -->
             <section id="tasks" class="content-section">
-<h2>Tâches</h2>
-
+                <h2>Tâches à Réaliser</h2>
                 <div class="tasks-list">
                     <div class="task card animated">
                         <h3>Nettoyage complet</h3>
@@ -216,11 +212,10 @@ try {
 
             <!-- Section Revenus -->
             <section id="revenue" class="content-section">
-<h2>Revenus</h2>
-
+                <h2>Revenus Mensuels</h2>
                 <div class="revenue-stats">
                     <div class="stat card animated">
-                        <h3>Revenus du Mois</h3>
+                        <h3>Revenus Mensuels</h3>
                         <p>$2,500</p>
                     </div>
                     <div class="stat card animated">
@@ -233,8 +228,7 @@ try {
 
             <!-- Section Paramètres -->
             <section id="settings" class="content-section">
-<h2>Paramètres</h2>
-
+                <h2>Paramètres</h2>
                 <form class="settings-form card animated">
                     <div class="form-group">
                         <label for="username">Nom d'utilisateur :</label>

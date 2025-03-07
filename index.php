@@ -59,238 +59,237 @@ require_once __DIR__ . '/src/app/component/Header.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Our Service</title>
-    <link rel="stylesheet" href="src/app/style/main.css?v=1.0.1"> <!-- Lien vers le fichier CSS -->
+    <title>Bienvenue dans notre service</title>
+    <link rel="stylesheet" href="src/app/style/main.css?v=1.0.1">
     <style>
         :root {
-            --primary-color: #ff6347; /* Couleur principale (orange) */
-            --primary-hover-color: #ff4500; /* Bleu moderne */
-   
-    --secondary-color: #3f3f46;  /* Gris foncé */
-    --background-color: #f8fafc; /* Fond clair */
-    --text-color: #1e293b;       /* Texte foncé */
-    --light-text-color: #64748b;
-    --border-color: #e2e8f0;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
+            --primary-color: #ff6347; 
+            --primary-hover-color: #ff4500; 
+            --secondary-color: #3f3f46;  
+            --background-color: #f8fafc;
+            --text-color: #1e293b;       
+            --light-text-color: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
 
-/* Conteneur principal */
-.appointment-container {
-    position: fixed;
-    left: 0;
-    bottom: -100%;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center; /* Alignement en bas pour l'animation */
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 1000;
-    opacity: 0;
-}
+        /* Conteneur principal */
+        .appointment-container {
+            position: fixed;
+            left: 0;
+            bottom: -100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            opacity: 0;
+        }
 
-.appointment-container.active {
-    bottom: 0;
-    opacity: 1;
-}
+        .appointment-container.active {
+            bottom: 0;
+            opacity: 1;
+        }
 
-/* Carte de rendez-vous */
-.appointment-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    max-height: 90vh;
-    width: 100%;
-    max-width: 800px;
-    background: white;
-    border: none;
-    border-radius: 4px 4px;
-    box-shadow: var(--shadow);
-    transform: translateY(100%);
-    transition: transform 0.3s ease-out;
-}
+        /* Carte de rendez-vous */
+        .appointment-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border: none;
+            border-radius: 4px 4px;
+            box-shadow: var(--shadow);
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
 
-.appointment-container.active .appointment-card {
-    transform: translateY(0);
-}
+        .appointment-container.active .appointment-card {
+            transform: translateY(0);
+        }
 
-/* Image container */
-.image-container {
-    height: 240px;
-    background-position: center;
-    background-size: cover;
-    border-radius: 4px 4px 0 0;
-    position: relative;
-    overflow: hidden;
-}
+        /* Image container */
+        .image-container {
+            height: 240px;
+            background-position: center;
+            background-size: cover;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-.image-container::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60%;
-    background: linear-gradient(transparent, rgba(0,0,0,0.6));
-}
+        .image-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+        }
 
-/* Détails du rendez-vous */
-.appointment-details {
-    padding: 2rem;
-    overflow-y: auto;
-}
+        /* Détails du rendez-vous */
+        .appointment-details {
+            padding: 2rem;
+            overflow-y: auto;
+        }
 
-.worker-info {
-    margin-bottom: 2rem;
-}
+        .worker-info {
+            margin-bottom: 2rem;
+        }
 
-.worker-info h2 {
-    font-size: 1.8rem;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
-}
+        .worker-info h2 {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
 
-.worker-profession {
-    color: var(--primary-color);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    text-transform: capitalize;
-}
+        .worker-profession {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: capitalize;
+        }
 
-.worker-rate {
-    color: var(--light-text-color);
-    font-size: 0.9rem;
-}
+        .worker-rate {
+            color: var(--light-text-color);
+            font-size: 0.9rem;
+        }
 
-/* Formulaire */
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
+        /* Formulaire */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
 
-.date-picker-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
+        .date-picker-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
-.date-picker-group label {
-    color: var(--text-color);
-    font-weight: 500;
-    text-transform: capitalize;
-}
+        .date-picker-group label {
+            color: var(--text-color);
+            font-weight: 500;
+            text-transform: capitalize;
+        }
 
-.date-picker-group input[type="date"] {
-    padding: 1rem;
-    border: 2px solid var(--border-color);
-    border-radius: 0.75rem;
-    font-size: 1rem;
-    transition: all 0.2s ease;
-}
+        .date-picker-group input[type="date"] {
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
 
-.date-picker-group input[type="date"]:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    outline: none;
-}
+        .date-picker-group input[type="date"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
 
-/* Bouton CTA */
-.cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1.25rem 2rem;
-    border-radius: 0.75rem;
-    background: var(--primary-color);
-    color: white;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    width: fit-content;
-}
+        /* Bouton CTA */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.25rem 2rem;
+            border-radius: 0.75rem;
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: fit-content;
+        }
 
-.cta-button:hover {
-    background: var(--primary-hover-color);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow);
-}
+        .cta-button:hover {
+            background: var(--primary-hover-color);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
 
-.cta-button .button-icon {
-    transition: transform 0.2s ease;
-}
+        .cta-button .button-icon {
+            transition: transform 0.2s ease;
+        }
 
-.cta-button:hover .button-icon {
-    transform: scale(1.1);
-}
+        .cta-button:hover .button-icon {
+            transform: scale(1.1);
+        }
 
-/* Bouton fermeture */
-.btn_close {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: all 0.2s ease;
-}
+        /* Bouton fermeture */
+        .btn_close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+        }
 
-.btn_close:hover {
-    background: white;
-    transform: rotate(90deg);
-}
+        .btn_close:hover {
+            background: white;
+            transform: rotate(90deg);
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .appointment-card {
-        max-width: 100%;
-    }
-    
-    .image-container {
-        height: 180px;
-    }
-    
-    .appointment-details {
-        padding: 1.5rem;
-    }
-    
-    .cta-button {
-        width: 100%;
-        justify-content: center;
-    }
-}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .appointment-card {
+                max-width: 100%;
+            }
+            
+            .image-container {
+                height: 180px;
+            }
+            
+            .appointment-details {
+                padding: 1.5rem;
+            }
+            
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
 
-@media (min-width: 1024px) {
-    .appointment-card {
-        flex-direction: row;
-        max-height: 600px;
-    }
-    
-    .image-container {
-        width: 45%;
-        height: auto;
-        border-radius: 4px 0 0 4px;
-    }
-    
-    .appointment-details {
-        width: 55%;
-        padding: 3rem;
-    }
-}
+        @media (min-width: 1024px) {
+            .appointment-card {
+                flex-direction: row;
+                max-height: 600px;
+            }
+            
+            .image-container {
+                width: 45%;
+                height: auto;
+                border-radius: 4px 0 0 4px;
+            }
+            
+            .appointment-details {
+                width: 55%;
+                padding: 3rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -299,8 +298,8 @@ require_once __DIR__ . '/src/app/component/Header.php';
     <!-- Header.php -->
     <header class="hero-section">
         <div class="hero-content">
-            <h1>Welcome to Our Service</h1>
-            <p>Explore our features and services that can help you achieve your goals.</p>
+            <h1>Bienvenue dans notre service</h1>
+            <p>Explorez nos fonctionnalités et services qui peuvent vous aider à atteindre vos objectifs.</p>
 
             <!-- Barre de recherche -->
             <form action="<?php echo getRoute('search'); ?>" method="GET" class="search-form">
@@ -313,7 +312,7 @@ require_once __DIR__ . '/src/app/component/Header.php';
 
     <section class="services-section">
         <h1 class="section-title">
-            <?= empty($activity) && empty($city) ? 'Our Team' : 'Search Results' ?>
+            <?= empty($activity) && empty($city) ? 'Notre Équipe' : 'Résultats de la Recherche' ?>
         </h1>
 
         <?php if (empty($workers)): ?>
@@ -323,44 +322,42 @@ require_once __DIR__ . '/src/app/component/Header.php';
             </div>
         <?php else: ?>
             <div class="services-container">
-            <?php foreach ($workers as $worker): 
-                // Génération des chemins d'image
-                $imagePath = $uploadDir . $worker['photo_url'];
-                $imageUrl = file_exists($imagePath) ? $uploadUrl . $worker['photo_url'] : $defaultImage;
-            ?>
-                <!-- Carte de worker cliquable -->
-                <div class="service-card" 
-                     data-id="<?= htmlspecialchars($worker['id']) ?>" 
-                     data-name="<?= htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']) ?>" 
-                     data-profession="<?= htmlspecialchars($worker['profession']) ?>" 
-                     data-photo="<?= htmlspecialchars($imageUrl) ?>" 
-                     data-rate="<?= htmlspecialchars($worker['hourly_rate']) ?>" 
-                     data-description="<?= htmlspecialchars($worker['description']) ?>">
-                    
-                    <img src="<?= htmlspecialchars($imageUrl) ?>" 
-                         alt="<?= htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']) ?>" 
-                         class="service-image">
+                <?php foreach ($workers as $worker): 
+                    // Génération des chemins d'image
+                    $imagePath = $uploadDir . $worker['photo_url'];
+                    $imageUrl = file_exists($imagePath) ? $uploadUrl . $worker['photo_url'] : $defaultImage;
+                ?>
+                    <!-- Carte de worker cliquable -->
+                    <div class="service-card" 
+                         data-id="<?= htmlspecialchars($worker['id']) ?>" 
+                         data-name="<?= htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']) ?>" 
+                         data-profession="<?= htmlspecialchars($worker['profession']) ?>" 
+                         data-photo="<?= htmlspecialchars($imageUrl) ?>" 
+                         data-rate="<?= htmlspecialchars($worker['hourly_rate']) ?>" 
+                         data-description="<?= htmlspecialchars($worker['description']) ?>">
+                        
+                        <img src="<?= htmlspecialchars($imageUrl) ?>" 
+                             alt="<?= htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']) ?>" 
+                             class="service-image">
 
-                    <div class="card_text">
-                        <div class="card_title">
-                            <h2 class="service-title">
-                                <?= htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']) ?>
-                            </h2>
-                            <h3 class="service-job-title">
-                                <?= htmlspecialchars($worker['profession']) ?>
-                            </h3>
+                        <div class="card_text">
+                            <div class="card_title">
+                                <h2 class="service-title">
+                                    <?= htmlspecialchars($worker['first_name'] . ' ' . $worker['last_name']) ?>
+                                </h2>
+                                <h3 class="service-job-title">
+                                    <?= htmlspecialchars($worker['profession']) ?>
+                                </h3>
+                            </div>
+                            <p class="service-description">
+                                <?= htmlspecialchars($worker['description']) ?>
+                            </p>
+                            <p class="service-rate">
+                                Tarif Horaire : <?= htmlspecialchars($worker['hourly_rate']) ?> €
+                            </p>
                         </div>
-                        <p class="service-description">
-                            <?= htmlspecialchars($worker['description']) ?>
-                        </p>
-                        <p class="service-rate">
-                            Tarif horaire : <?= htmlspecialchars($worker['hourly_rate']) ?> €
-                        </p>
-                        <!-- Lien "Learn More" avec ID worker -->
-                       
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             </div>
         <?php endif; ?>
     </section>
@@ -406,7 +403,6 @@ require_once __DIR__ . '/src/app/component/Header.php';
   
     <!-- Script JavaScript -->
     <script>
-    // Gestion du clic sur les cartes
     document.querySelectorAll('.service-card').forEach(card => {
         card.addEventListener('click', (e) => {
             // Ignore les clics sur les liens
@@ -437,7 +433,6 @@ require_once __DIR__ . '/src/app/component/Header.php';
         });
     });
 
-    // Gestion de la fermeture
     const toggle_button = document.querySelector('.btn_close');
     const appointmentContainer = document.querySelector('.appointment-container');
     
@@ -448,66 +443,65 @@ require_once __DIR__ . '/src/app/component/Header.php';
     }
 
     // Modification de handleAppointment()
-  // Modification de handleAppointment()
-function handleAppointment() {
-    const workerId = document.getElementById('selectedWorkerId').value;
-    const dateInput = document.getElementById('appointmentDate');
-    const selectedDate = dateInput.value;
-    
-    if (selectedDate && workerId) {
-        // Exemple d'envoi avec Fetch API
-        const formData = new FormData();
-        formData.append('worker_id', workerId);
-        formData.append('date', selectedDate);
+    function handleAppointment() {
+        const workerId = document.getElementById('selectedWorkerId').value;
+        const dateInput = document.getElementById('appointmentDate');
+        const selectedDate = dateInput.value;
+        
+        if (selectedDate && workerId) {
+            // Exemple d'envoi avec Fetch API
+            const formData = new FormData();
+            formData.append('worker_id', workerId);
+            formData.append('date', selectedDate);
 
-        fetch('http://localhost/findservice/src/app/functions/create_appointment.php', { // Assurez-vous que le chemin est correct
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(`Rendez-vous confirmé avec ${document.getElementById('workerName').textContent} pour le ${selectedDate}`);
-                appointmentContainer.classList.remove('active'); // Masque le conteneur après confirmation
-            } else {
-                alert('Erreur : ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Une erreur est survenue');
-        });
-    } else {
-        alert('Veuillez sélectionner une date valide');
+            fetch('http://localhost/findservice/src/app/functions/create_appointment.php', { 
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Rendez-vous confirmé avec ${document.getElementById('workerName').textContent} pour le ${selectedDate}`);
+                    appointmentContainer.classList.remove('active');
+                } else {
+                    alert('Erreur : ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Une erreur est survenue');
+            });
+        } else {
+            alert('Veuillez sélectionner une date valide');
+        }
     }
-}
     </script>
 </body>
 <footer class="footer_b">
     <div class="footer-container">
         <!-- Section À Propos -->
         <div class="footer-section">
-            <h3 class="footer-title">About Us</h3>
+            <h3 class="footer-title">À Propos</h3>
             <p class="footer-description">
-                We are dedicated to providing high-quality services and solutions to help you achieve your goals.
+                Nous sommes dédiés à fournir des services de haute qualité pour vous aider à atteindre vos objectifs.
             </p>
         </div>
 
         <!-- Liens Utiles -->
         <div class="footer-section">
-            <h3 class="footer-title">Quick Links</h3>
+            <h3 class="footer-title">Liens Pratiques</h3>
             <ul class="footer-links">
-                <li><a href="<?php echo getRoute('home'); ?>">Home</a></li>
+                <li><a href="<?php echo getRoute('home'); ?>">Accueil</a></li>
                 <li><a href="<?php echo getRoute('explore'); ?>">Services</a></li>
-                <li><a href="<?php echo getRoute('about'); ?>">About Us</a></li>
+                <li><a href="<?php echo getRoute('about'); ?>">À Propos</a></li>
                 <li><a href="<?php echo getRoute('contact'); ?>">Contact</a></li>
-                <li><a href="<?php echo getRoute('login'); ?>">Login</a></li>
+                <li><a href="<?php echo getRoute('login'); ?>">Connexion</a></li>
             </ul>
         </div>
 
         <!-- Informations de Contact -->
         <div class="footer-section">
-            <h3 class="footer-title">Contact Us</h3>
+            <h3 class="footer-title">Contactez-Nous</h3>
             <ul class="footer-contact">
                 <li><i class="fas fa-map-marker-alt"></i> 123 Main Street, City, Country</li>
                 <li><i class="fas fa-phone"></i> +123 456 7890</li>
@@ -517,13 +511,13 @@ function handleAppointment() {
 
         <!-- Newsletter -->
         <div class="footer-section">
-            <h3 class="footer-title">Newsletter</h3>
+            <h3 class="footer-title">Bulletin d'Information</h3>
             <p class="footer-description">
-                Subscribe to our newsletter to get the latest updates and offers.
+                Abonnez-vous à notre newsletter pour recevoir les dernières mises à jour et offres.
             </p>
             <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit" class="btn">Subscribe</button>
+                <input type="email" placeholder="Entrez votre email" required>
+                <button type="submit" class="btn">S'abonner</button>
             </form>
         </div>
     </div>
@@ -538,7 +532,7 @@ function handleAppointment() {
 
     <!-- Copyright -->
     <div class="footer-bottom">
-        <p>&copy; 2025 Your Company. All rights reserved.</p>
+        <p>&copy; 2025 Votre Entreprise. Tous droits réservés.</p>
     </div>
 </footer>
 
