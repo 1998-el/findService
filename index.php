@@ -65,6 +65,233 @@ require_once __DIR__ . '/src/app/component/Header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Our Service</title>
     <link rel="stylesheet" href="src/app/style/main.css?v=1.0.1"> <!-- Lien vers le fichier CSS -->
+    <style>
+        :root {
+            --primary-color: #ff6347; /* Couleur principale (orange) */
+            --primary-hover-color: #ff4500; /* Bleu moderne */
+   
+    --secondary-color: #3f3f46;  /* Gris foncé */
+    --background-color: #f8fafc; /* Fond clair */
+    --text-color: #1e293b;       /* Texte foncé */
+    --light-text-color: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Conteneur principal */
+.appointment-container {
+    position: fixed;
+    left: 0;
+    bottom: -100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center; /* Alignement en bas pour l'animation */
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    opacity: 0;
+}
+
+.appointment-container.active {
+    bottom: 0;
+    opacity: 1;
+}
+
+/* Carte de rendez-vous */
+.appointment-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    width: 100%;
+    max-width: 800px;
+    background: white;
+    border: none;
+    border-radius: 4px 4px;
+    box-shadow: var(--shadow);
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+}
+
+.appointment-container.active .appointment-card {
+    transform: translateY(0);
+}
+
+/* Image container */
+.image-container {
+    height: 240px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+}
+
+/* Détails du rendez-vous */
+.appointment-details {
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.worker-info {
+    margin-bottom: 2rem;
+}
+
+.worker-info h2 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.worker-profession {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+}
+
+.worker-rate {
+    color: var(--light-text-color);
+    font-size: 0.9rem;
+}
+
+/* Formulaire */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.date-picker-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.date-picker-group label {
+    color: var(--text-color);
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.date-picker-group input[type="date"] {
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.date-picker-group input[type="date"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    outline: none;
+}
+
+/* Bouton CTA */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2rem;
+    border-radius: 0.75rem;
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: fit-content;
+}
+
+.cta-button:hover {
+    background: var(--primary-hover-color);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+.cta-button .button-icon {
+    transition: transform 0.2s ease;
+}
+
+.cta-button:hover .button-icon {
+    transform: scale(1.1);
+}
+
+/* Bouton fermeture */
+.btn_close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.2s ease;
+}
+
+.btn_close:hover {
+    background: white;
+    transform: rotate(90deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .appointment-card {
+        max-width: 100%;
+    }
+    
+    .image-container {
+        height: 180px;
+    }
+    
+    .appointment-details {
+        padding: 1.5rem;
+    }
+    
+    .cta-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .appointment-card {
+        flex-direction: row;
+        max-height: 600px;
+    }
+    
+    .image-container {
+        width: 45%;
+        height: auto;
+        border-radius: 4px 0 0 4px;
+    }
+    
+    .appointment-details {
+        width: 55%;
+        padding: 3rem;
+    }
+}
+    </style>
 </head>
 <body>
     <div class="body_container">
@@ -130,10 +357,7 @@ require_once __DIR__ . '/src/app/component/Header.php';
                             Tarif horaire : <?= htmlspecialchars($worker['hourly_rate']) ?> €
                         </p>
                         <!-- Lien "Learn More" avec ID worker -->
-                        <a href="<?= getRoute('preview') ?>?worker_id=<?= htmlspecialchars($worker['id']) ?>" 
-                           class="btn">
-                            Learn More
-                        </a>
+                       
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -144,6 +368,7 @@ require_once __DIR__ . '/src/app/component/Header.php';
     <!-- Conteneur de rendez-vous -->
     <div class="appointment-container">
         <div class="appointment-card">
+            <button class="btn_close">✖</button>
             <div class="image-container" id="workerImageContainer">
                 <!-- Image dynamique -->
             </div>
@@ -206,7 +431,7 @@ require_once __DIR__ . '/src/app/component/Header.php';
                 // Réinitialise la date
                 document.getElementById('appointmentDate').value = '';
                 
-                // Affiche le container
+                // Affiche le container avec animation
                 document.querySelector('.appointment-container').classList.add('active'); // Assurez-vous que le conteneur est visible
             }
         });
@@ -218,43 +443,44 @@ require_once __DIR__ . '/src/app/component/Header.php';
     
     if (toggle_button && appointmentContainer) {
         toggle_button.addEventListener('click', () => {
-            appointmentContainer.classList.remove('active');
+            appointmentContainer.classList.remove('active'); // Masque le conteneur
         });
     }
 
     // Modification de handleAppointment()
-    function handleAppointment() {
-        const workerId = document.getElementById('selectedWorkerId').value;
-        const dateInput = document.getElementById('appointmentDate');
-        const selectedDate = dateInput.value;
-        
-        if (selectedDate && workerId) {
-            // Exemple d'envoi avec Fetch API
-            const formData = new FormData();
-            formData.append('worker_id', workerId);
-            formData.append('date', selectedDate);
+  // Modification de handleAppointment()
+function handleAppointment() {
+    const workerId = document.getElementById('selectedWorkerId').value;
+    const dateInput = document.getElementById('appointmentDate');
+    const selectedDate = dateInput.value;
+    
+    if (selectedDate && workerId) {
+        // Exemple d'envoi avec Fetch API
+        const formData = new FormData();
+        formData.append('worker_id', workerId);
+        formData.append('date', selectedDate);
 
-            fetch('<?= getRoute("appointment") ?>', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(`Rendez-vous confirmé avec ${document.getElementById('workerName').textContent} pour le ${selectedDate}`);
-                    appointmentContainer.classList.remove('active');
-                } else {
-                    alert('Erreur : ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Une erreur est survenue');
-            });
-        } else {
-            alert('Veuillez sélectionner une date valide');
-        }
+        fetch('http://localhost/findservice/src/app/functions/create_appointment.php', { // Assurez-vous que le chemin est correct
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(`Rendez-vous confirmé avec ${document.getElementById('workerName').textContent} pour le ${selectedDate}`);
+                appointmentContainer.classList.remove('active'); // Masque le conteneur après confirmation
+            } else {
+                alert('Erreur : ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Une erreur est survenue');
+        });
+    } else {
+        alert('Veuillez sélectionner une date valide');
     }
+}
     </script>
 </body>
 <footer class="footer_b">

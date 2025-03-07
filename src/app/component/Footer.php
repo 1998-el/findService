@@ -2,15 +2,18 @@
     <div class="footer-container">
         <!-- Section À Propos -->
         <div class="footer-section">
-            <h3 class="footer-title">About Us</h3>
-            <p class="footer-description">
-                We are dedicated to providing high-quality services and solutions to help you achieve your goals.
-            </p>
+<h3 class="footer-title">À Propos de Nous</h3>
+
+<p class="footer-description">
+    Nous nous engageons à fournir des services et des solutions de haute qualité pour vous aider à atteindre vos objectifs.
+</p>
+
         </div>
 
         <!-- Liens Utiles -->
         <div class="footer-section">
-            <h3 class="footer-title">Quick Links</h3>
+<h3 class="footer-title">Liens Utiles</h3>
+
             <ul class="footer-links">
                 <li><a href="<?php echo getRoute('home'); ?>">Home</a></li>
                 <li><a href="<?php echo getRoute('explore'); ?>">Services</a></li>
@@ -21,7 +24,8 @@
 
         <!-- Informations de Contact -->
         <div class="footer-section">
-            <h3 class="footer-title">Contact Us</h3>
+<h3 class="footer-title">Contactez-Nous</h3>
+
             <ul class="footer-contact">
                 <li><i class="fas fa-map-marker-alt"></i> 123 Main Street, City, Country</li>
                 <li><i class="fas fa-phone"></i> +123 456 7890</li>
@@ -31,13 +35,16 @@
 
         <!-- Newsletter -->
         <div class="footer-section">
-            <h3 class="footer-title">Newsletter</h3>
-            <p class="footer-description">
-                Subscribe to our newsletter to get the latest updates and offers.
-            </p>
+<h3 class="footer-title">Bulletin d'Information</h3>
+
+<p class="footer-description">
+    Abonnez-vous à notre bulletin d'information pour recevoir les dernières mises à jour et offres.
+</p>
+
             <form class="newsletter-form">
                 <input type="email" placeholder="Enter your email" required>
-                <button type="submit" class="btn">Subscribe</button>
+<button type="submit" class="btn">S'abonner</button>
+
             </form>
         </div>
     </div>

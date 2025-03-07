@@ -32,9 +32,10 @@
                     <input type="hidden" id="selectedWorkerId" name="worker_id">
                 </div>
                 
-                <button class="cta-button" onclick="handleAppointment()">
+<button class="cta-button" onclick="handleAppointment()">
                     <span class="button-icon">📅</span>
-                    Prendre Rendez-vous
+                    Prendre un Rendez-vous
+
                 </button>
             </div>
         </div>
