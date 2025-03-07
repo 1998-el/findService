@@ -105,14 +105,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <select id="services" name="services" required>
                         <option value="">-- Sélectionnez un service --</option>
                         <?php
-                        $servicesList = [
-                            'nettoyage' => 'Nettoyage',
-                            'plomberie' => 'Plomberie',
-                            'electricite' => 'Électricité',
-                            'jardinage' => 'Jardinage',
-                            'peinture' => 'Peinture',
-                            'demenagement' => 'Déménagement'
-                        ];
+                     $servicesList = [
+                        'nettoyage' => 'Nettoyage',
+                        'plomberie' => 'Plomberie',
+                        'electricite' => 'Électricité',
+                        'jardinage' => 'Jardinage',
+                        'peinture' => 'Peinture',
+                        'demenagement' => 'Déménagement',
+                        'maçonnerie' => 'Maçonnerie',
+                        'menuiserie' => 'Menuiserie',
+                        'chauffage' => 'Chauffage',
+                        'climatisation' => 'Climatisation',
+                        'réparation' => 'Réparation d\'appareils électroménagers',
+                        'nettoyage_de_fond' => 'Nettoyage de fond',
+                        'entretien_de_jardin' => 'Entretien de jardin',
+                        'pose_de_tapis' => 'Pose de tapis',
+                        'remise_en_etat' => 'Remise en état après sinistre',
+                        'services_informatiques' => 'Services informatiques',
+                        'conseil_en_renovation' => 'Conseil en rénovation',
+                        'gardiennage' => 'Gardiennage de propriété',
+                        'assistance_personnelle' => 'Assistance personnelle',
+                        'cours_particuliers' => 'Cours particuliers',
+                        'photographie' => 'Photographie',
+                        'livraison' => 'Service de livraison'
+                    ];
                         
                         foreach ($servicesList as $value => $label): ?>
                             <option value="<?= htmlspecialchars($value) ?>" <?= ($services ?? '') === $value ? 'selected' : '' ?>>
@@ -123,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="input-group">
-                    <label for="hourly_rate">Facturation horaire (€)</label>
+                    <label for="hourly_rate">Facturation horaire (FCFA)</label>
                     <input type="number" id="hourly_rate" name="hourly_rate" min="10" max="500" step="1" 
                            value="<?= htmlspecialchars($hourlyRate ?? '') ?>" required>
                 </div>

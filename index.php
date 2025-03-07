@@ -353,7 +353,7 @@ require_once __DIR__ . '/src/app/component/Header.php';
                                 <?= htmlspecialchars($worker['description']) ?>
                             </p>
                             <p class="service-rate">
-                                Tarif Horaire : <?= htmlspecialchars($worker['hourly_rate']) ?> €
+                                Tarif Horaire : <?= htmlspecialchars($worker['hourly_rate']) ?> FCFA
                             </p>
                         </div>
                     </div>

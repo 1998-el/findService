@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 } else {
                     // Rediriger vers la page d'accueil pour les Clients
-                    header('Location: index.php');
+                    header('Location: /Login.php');
                     exit;
                 }
             } catch (PDOException $e) {

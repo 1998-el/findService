@@ -41,14 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user['password'])) {
             // Authentification réussie
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['first_name']; // Stocker le prénom de l'utilisateur
-            $_SESSION['role'] = $user['role']; // Stocker le rôle de l'utilisateur
+            $_SESSION['username'] = $user['first_name']; 
+            $_SESSION['role'] = $user['role']; 
 
-            // Rediriger en fonction du rôle
             if ($user['role'] === 'worker') {
-                header('Location: /findservice/');
+                header('Location: dashboard.php'); // Redirection vers le tableau de bord des workers
             } else {
-                header('Location: /findservice/src/app/view/Register.php');
+                header('Location: /findservice/'); // Redirection  vers la page d'inscription
+               
             }
             exit;
         } else {
